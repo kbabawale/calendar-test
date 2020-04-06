@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'calendar-labs';
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+
+  calendarPlugins = [dayGridPlugin];
+
+  jumpto(num) {
+    let calendarApi = this.calendarComponent.getApi();
+    calendarApi.prev();
+  }
+
+  jumpfrom(num) {
+    let calendarApi = this.calendarComponent.getApi();
+    calendarApi.next();
+  }
 }
